@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { getHealth } from '../lib/api';
+import { getHealth, getBaseUrl } from '../lib/api';
 
 /**
  * PUBLIC_INTERFACE
@@ -88,6 +88,12 @@ function HealthStatus() {
       </header>
 
       <div className="health-card__body">
+        {process.env.REACT_APP_LOG_LEVEL === 'debug' && (
+          <p className="health-meta">
+            Backend base: {getBaseUrl()}
+          </p>
+        )}
+
         {loading && (
           <p className="health-text health-text--loading">
             <span className="dot dot--pulse" aria-hidden="true" /> Loading...
