@@ -1,0 +1,4 @@
+{
+    "command": "npm run test",
+    "working_directory": "/home/kavia/workspace/code-generation/react-windows-gui-demo-209878-209887/windows_gui_frontend"
+}
