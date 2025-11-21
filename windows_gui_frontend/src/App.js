@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import logo from './logo.svg';
 import './App.css';
+import HealthStatus from './components/HealthStatus';
 
 // PUBLIC_INTERFACE
 function App() {
@@ -26,13 +27,20 @@ function App() {
         >
           {theme === 'light' ? '🌙 Dark' : '☀️ Light'}
         </button>
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <p>
-          Current theme: <strong>{theme}</strong>
-        </p>
+
+        <div className="hero">
+          <img src={logo} className="App-logo" alt="logo" />
+          <h1 className="title">React Windows GUI Demo</h1>
+          <p className="subtitle">Modern UI with Ocean Professional theme</p>
+          <p className="current-theme">
+            Current theme: <strong>{theme}</strong>
+          </p>
+        </div>
+
+        <div className="content">
+          <HealthStatus />
+        </div>
+
         <a
           className="App-link"
           href="https://reactjs.org"

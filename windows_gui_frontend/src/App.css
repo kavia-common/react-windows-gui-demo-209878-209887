@@ -1,24 +1,40 @@
-/* CSS Variables for Theme Management */
+/* CSS Variables for Theme Management + Ocean Professional palette */
 :root {
-  /* Light theme colors */
-  --bg-primary: #ffffff;
-  --bg-secondary: #f8f9fa;
-  --text-primary: #282c34;
-  --text-secondary: #61dafb;
-  --border-color: #e9ecef;
-  --button-bg: #007bff;
+  /* Light theme */
+  --bg-primary: #f9fafb; /* style guide background */
+  --bg-secondary: #ffffff; /* surface */
+  --text-primary: #111827; /* slate-900 */
+  --text-secondary: #2563EB; /* primary link */
+  --border-color: #e5e7eb; /* gray-200 */
+  --button-bg: #2563EB; /* primary */
   --button-text: #ffffff;
+
+  /* Ocean Professional accents */
+  --accent-primary: #2563EB; /* primary blue */
+  --accent-amber: #F59E0B;  /* amber for warning/success badge */
+  --accent-error: #EF4444;  /* error red */
+  --gradient-from: rgba(59, 130, 246, 0.10); /* from-blue-500/10 */
+  --gradient-to: #f9fafb; /* to-gray-50 */
+
+  --shadow-sm: 0 1px 2px rgba(0,0,0,0.06);
+  --shadow-md: 0 4px 12px rgba(0,0,0,0.08);
 }
 
 [data-theme="dark"] {
-  /* Dark theme colors */
-  --bg-primary: #1a1a1a;
-  --bg-secondary: #282c34;
-  --text-primary: #ffffff;
-  --text-secondary: #61dafb;
-  --border-color: #404040;
-  --button-bg: #0056b3;
+  /* Dark theme */
+  --bg-primary: #0f172a; /* slate-900-ish */
+  --bg-secondary: #111827; /* slate-800 */
+  --text-primary: #f9fafb;
+  --text-secondary: #93c5fd;
+  --border-color: #1f2937;
+  --button-bg: #2563EB;
   --button-text: #ffffff;
+
+  --gradient-from: rgba(59, 130, 246, 0.12);
+  --gradient-to: #0f172a;
+
+  --shadow-sm: 0 1px 2px rgba(0,0,0,0.35);
+  --shadow-md: 0 6px 18px rgba(0,0,0,0.45);
 }
 
 .App {
@@ -41,21 +57,53 @@
 }
 
 .App-header {
-  background-color: var(--bg-secondary);
+  background: linear-gradient(180deg, var(--gradient-from), var(--gradient-to));
   min-height: 100vh;
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
+  justify-content: flex-start;
+  gap: 24px;
+  padding: 64px 24px 48px;
   font-size: calc(10px + 2vmin);
   color: var(--text-primary);
-  transition: background-color 0.3s ease;
+  transition: background-color 0.3s ease, background 0.3s ease;
   position: relative;
+}
+
+.hero .title {
+  margin: 12px 0 0;
+  font-size: 28px;
+  letter-spacing: 0.2px;
+}
+
+.hero .subtitle {
+  margin: 6px 0 8px;
+  font-size: 16px;
+  color: rgba(17, 24, 39, 0.75);
+}
+
+[data-theme="dark"] .hero .subtitle {
+  color: rgba(249, 250, 251, 0.75);
+}
+
+.current-theme {
+  font-size: 14px;
+  opacity: 0.85;
+}
+
+.content {
+  width: 100%;
+  max-width: 760px;
+  padding: 0 12px;
 }
 
 .App-link {
   color: var(--text-secondary);
-  transition: color 0.3s ease;
+  transition: color 0.3s ease, transform 0.2s ease;
+}
+.App-link:hover {
+  transform: translateY(-1px);
 }
 
 .theme-toggle {
@@ -65,40 +113,147 @@
   background-color: var(--button-bg);
   color: var(--button-text);
   border: none;
-  border-radius: 8px;
+  border-radius: 10px;
   padding: 10px 20px;
   font-size: 14px;
   font-weight: 600;
   cursor: pointer;
   transition: all 0.3s ease;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  box-shadow: var(--shadow-sm);
 }
 
 .theme-toggle:hover {
   transform: translateY(-2px);
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
-  opacity: 0.9;
+  box-shadow: var(--shadow-md);
+  opacity: 0.96;
 }
 
 .theme-toggle:active {
   transform: translateY(0);
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+/* Health card styles */
+.health-card {
+  background: var(--bg-secondary);
+  border: 1px solid var(--border-color);
+  border-radius: 16px;
+  padding: 18px 18px;
+  box-shadow: var(--shadow-sm);
+  text-align: left;
 }
 
-/* Responsive design for mobile */
+.health-card__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 10px;
+}
+
+.health-card__title {
+  font-size: 18px;
+  margin: 0;
+}
+
+.badge {
+  display: inline-flex;
+  align-items: center;
+  border-radius: 999px;
+  padding: 6px 10px;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.3px;
+  color: #fff;
+  box-shadow: var(--shadow-sm);
+}
+
+.badge--ok {
+  background: linear-gradient(180deg, rgba(245, 158, 11, 0.95), rgba(245, 158, 11, 0.88)); /* amber */
+}
+
+.badge--error {
+  background: linear-gradient(180deg, rgba(239, 68, 68, 0.95), rgba(239, 68, 68, 0.88)); /* red */
+}
+
+.health-card__body {
+  display: grid;
+  gap: 6px;
+}
+
+.health-text {
+  margin: 0;
+  line-height: 1.6;
+}
+
+.health-text--loading {
+  color: var(--accent-primary);
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.accent {
+  color: var(--accent-primary);
+}
+
+.error {
+  color: var(--accent-error);
+}
+
+.health-meta {
+  margin: 0;
+  font-size: 12px;
+  opacity: 0.8;
+}
+
+.health-hint {
+  margin: 4px 0 0;
+  font-size: 12px;
+  color: rgba(17, 24, 39, 0.7);
+}
+
+[data-theme="dark"] .health-hint {
+  color: rgba(249, 250, 251, 0.7);
+}
+
+/* Subtle animated dot for Loading... */
+.dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 999px;
+  background: var(--accent-primary);
+  display: inline-block;
+}
+
+.dot--pulse {
+  animation: pulse 1.4s ease-in-out infinite;
+}
+
+@keyframes pulse {
+  0% { transform: scale(0.9); opacity: 0.6; }
+  50% { transform: scale(1.15); opacity: 1; }
+  100% { transform: scale(0.9); opacity: 0.6; }
+}
+
+@keyframes App-logo-spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+/* Responsive */
 @media (max-width: 768px) {
   .theme-toggle {
     top: 10px;
     right: 10px;
     padding: 8px 16px;
     font-size: 12px;
+  }
+
+  .hero .title {
+    font-size: 22px;
+  }
+
+  .hero .subtitle {
+    font-size: 14px;
   }
 }
